@@ -40,7 +40,7 @@
     </div>
     <div class="flex items-center">
       <button class="p-2 border rouded relative" (click)="toogleSideMenu()">
-        <div class="absolute -top-2.5 -left-2.5 rounded h-5 w-5 bg-black text-white text-xs">{{cart.length}}</div>
+        <div class="absolute -top-2.5 -left-2.5 rounded h-5 w-5 bg-black text-white text-xs">{{cart().length}}</div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -82,10 +82,15 @@
       </svg>
     </button>
   </div>
-  <div>
-    <div *ngFor="let product of cart">
-      <p>{{ product.title }}</p>
-      <p>{{ product.price }}</p>
+  <div *ngFor="let product of cart()">
+    <div class="flex flex-row justify-between p-3">
+      <div class="flex flex-col justify-around">
+        <p>{{ product.title }}</p>
+        <p>{{ product.price | currency:'$':'symbol': '1.0' }} </p>
+      </div>
+      <img class="w-20 h-20" [src]=" product.images[0] " alt="">
     </div>
+    <hr/>
   </div>
+  <p>Total: {{ total() | currency:'$':'symbol':'1.0' }}</p>
 </div>
